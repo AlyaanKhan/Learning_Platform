@@ -4,7 +4,7 @@ import react from '@vitejs/plugin-react'
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [react()],
-  base: '/python-learning-platform/',
+  base: '/Learning_Platform/',
   server: {
     host: '0.0.0.0',
     port: 3000,
