@@ -3,6 +3,7 @@ import { Container, Box, Typography, Button, TextField, Paper, Snackbar, Alert }
 import { styled } from '@mui/material/styles';
 import { Terminal } from 'lucide-react';
 import { useLocation } from 'react-router-dom';
+import { API_ENDPOINTS } from '../config/api';
 
 const CodeContainer = styled(Paper)(({ theme }) => ({
   padding: theme.spacing(2),
@@ -109,7 +110,7 @@ const CodeEditorPage = () => {
     setError('');
 
     try {
-      const response = await fetch('http://localhost:5000/run-code', {
+      const response = await fetch(API_ENDPOINTS.RUN_CODE, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

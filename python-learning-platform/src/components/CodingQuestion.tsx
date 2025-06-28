@@ -10,6 +10,7 @@ import {
 } from '@mui/material';
 import { Play, ChevronDown, ChevronUp } from 'lucide-react';
 import type { CodingQuestion as CodingQuestionType } from '../types/quiz';
+import { API_ENDPOINTS } from '../config/api';
 
 interface CodingQuestionProps {
   question: CodingQuestionType;
@@ -40,7 +41,7 @@ const CodingQuestion: React.FC<CodingQuestionProps> = ({
     setError('');
 
     try {
-      const response = await fetch('http://localhost:5000/run-code', {
+      const response = await fetch(API_ENDPOINTS.RUN_CODE, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
