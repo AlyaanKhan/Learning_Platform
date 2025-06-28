@@ -1,5 +1,6 @@
 from flask import Flask, request, jsonify
 import requests
+import os
 
 app = Flask(__name__)
 
@@ -34,9 +35,18 @@ def run_code():
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
+@app.route('/health', methods=['GET'])
+def health_check():
+    return jsonify({'status': 'healthy'}), 200
+
 if __name__ == '__main__':
     # For development, allow CORS from your frontend origin
     # In production, configure CORS properly
     from flask_cors import CORS
-    CORS(app, origins=['http://localhost:3000', 'http://localhost:5173']) # Assuming your frontend runs on http://localhost:3000 or http://localhost:5173
-    app.run(debug=True) 
+    
+    # Get allowed origins from environment variable or use defaults
+    allowed_origins = os.environ.get('ALLOWED_ORIGINS', 'http://localhost:3000,http://localhost:5173').split(',')
+    CORS(app, origins=allowed_origins)
+    
+    port = int(os.environ.get('PORT', 5000))
+    app.run(host='0.0.0.0', port=port, debug=False) 
